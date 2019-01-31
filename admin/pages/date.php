@@ -131,11 +131,13 @@
                                                     <div>Visits In Between</div>
                                                     <?php 
                                                 if(isset($_POST['save'])){
-                                                    echo "STAFF : ".$staff_btwn;
+                                                    if($category=="all" || $category=="staff" ){
+                                                    echo "STAFF : ".$staff_btwn;}
                                                     ?>
                                                     <br>
                                                     <?php
-                                                    echo "STUDENT : ".$student_btwn;
+                                                    if($category=="all" || $category=="students" ){
+                                                    echo "STUDENT : ".$student_btwn;}
                                         ?>
                                                 </div>
                                             </div>
@@ -171,10 +173,19 @@
                                                     <?php echo $sel1['department']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_in']; ?>
+                                                    <?php 
+                                                    $originalDate =$row['datetime_in'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s');
+                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_out']; ?>
+                                                    
+                                                    <?php
+                                                     $originalDate =$row['datetime_out'];
+                                                     $dateTime = date_create($originalDate);
+                                                     echo date_format($dateTime, 'd-m-Y H:m:s');
+                                                     ?>
                                                 </td>
                                             </tr>
                                             <?php } ?>
@@ -214,10 +225,16 @@
                                                     <?php echo $sel1['sem']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_in']; ?>
+                                                    <?php 
+                                                    $originalDate =$row['datetime_in'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_out']; ?>
+                                                    <?php
+                                                    $originalDate =$row['datetime_out'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
                                                 </td>
                                             </tr>
                                             <?php } ?>
@@ -255,10 +272,16 @@
                                                     <?php echo $sel1['department']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_in']; ?>
+                                                    <?php 
+                                                    $originalDate =$row['datetime_in'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_out']; ?>
+                                                    <?php 
+                                                    $originalDate =$row['datetime_out'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
                                                 </td>
                                             </tr>
                                             <?php } ?>
@@ -300,10 +323,16 @@
                                                     <?php echo $sel1['sem']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_in']; ?>
+                                                    <?php
+                                                    $originalDate =$row['datetime_in'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $row['datetime_out']; ?>
+                                                    <?php 
+                                                    $originalDate =$row['datetime_out'];
+                                                    $dateTime = date_create($originalDate);
+                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
                                                 </td>
                                             </tr>
                                             <?php 
