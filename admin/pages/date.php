@@ -69,14 +69,14 @@
                                     <form method="POST">
                                         <div class="row">
                                             <div class="col">
-                                                From<br><input type="date" value="<?php if(isset($_POST['save'])){ echo $_POST['date_start']; }?>" name="date_start"><br>
+                                                From<br><input type="date" value="<?php if(isset($_POST['save'])){ echo $_POST['date_start']; }?>" name="date_start" required><br>
                                             </div>
                                             <div class="col">
-                                                To<br><input type="date" value="<?php if(isset($_POST['save'])){ echo $_POST['date_end']; }?>" name="date_end"><br>
+                                                To<br><input type="date" value="<?php if(isset($_POST['save'])){ echo $_POST['date_end']; }?>" name="date_end" required><br>
                                             </div>
                                             <div class="col">
-                                                <select name="category" class="btn btn-prima" style="margin-top:18px;font-size:14px">
-                                                    <option>Select Category
+                                                <select name="category" id="category" class="btn btn-prima" style="margin-top:18px;font-size:14px" required>
+                                                    <option value= "">Select Category
                                                     <option value="all">All
                                                     <option value="students">Students
                                                     <option value="staff">Staff
@@ -145,105 +145,8 @@
                                         <!-- --------------------------------------------------------- -->
                                         <?php
                                 
-                                if($category=="all"){
-                                    if(mysqli_num_rows($sel)>0){
-                                        // Datatable content-Staff
-                                        ?>
-                                        <table id="table_staff">
-                                            <thead>
-                                                <th>Employee Code</th>
-                                                <th>Name</th>
-                                                <th>Department</th>
-                                                <th>Entry Time</th>
-                                                <th>Exit Time</th>
-                                            </thead>
-                                            <?php
-                                        while($row = mysqli_fetch_assoc($sel)){
-                                            $id = $row['staff_id'];    
-                                            $sel1 = mysqli_fetch_assoc(mysqli_query($conn,"select * from staff where id = $id"));
-                                        ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $sel1['employee_code']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $sel1['name']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $sel1['department']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php 
-                                                    $originalDate =$row['datetime_in'];
-                                                    $dateTime = date_create($originalDate);
-                                                    echo date_format($dateTime, 'd-m-Y H:m:s');
-                                                     ?>
-                                                </td>
-                                                <td>
-                                                    
-                                                    <?php
-                                                     $originalDate =$row['datetime_out'];
-                                                     $dateTime = date_create($originalDate);
-                                                     echo date_format($dateTime, 'd-m-Y H:m:s');
-                                                     ?>
-                                                </td>
-                                            </tr>
-                                            <?php } ?>
-                                        </table>
-                                        <?php
 
-                                            // Datatable content-Student
-                                    }
-                                    if(mysqli_num_rows($selstud)>0){
-                                        // Datatable content-Staff
-                                        ?>
-                                        <table id="table_student">
-                                            <thead>
-                                                <th>Admission No</th>
-                                                <th>Name</th>
-                                                <th>Department</th>
-                                                <th>Semester</th>
-                                                <th>Entry Time</th>
-                                                <th>Exit Time</th>
-                                            </thead>
-                                            <?php
-                                        while($row = mysqli_fetch_assoc($selstud)){
-                                            $id = $row['students_id'];    
-                                            $sel1 = mysqli_fetch_assoc(mysqli_query($conn,"select * from students where id = $id"));
-                                        ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo $sel1['admission_no']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $sel1['name']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $sel1['dept']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $sel1['sem']; ?>
-                                                </td>
-                                                <td>
-                                                    <?php 
-                                                    $originalDate =$row['datetime_in'];
-                                                    $dateTime = date_create($originalDate);
-                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    $originalDate =$row['datetime_out'];
-                                                    $dateTime = date_create($originalDate);
-                                                    echo date_format($dateTime, 'd-m-Y H:m:s'); ?>
-                                                </td>
-                                            </tr>
-                                            <?php } ?>
-                                        </table>
-                                        <?php
-                                            // Datatable content-Student
-                                    }
-                                }
-                                else if($category=="staff"){
+                                if($category=="all" || $category=="staff"){
                                     echo "REPORT OF STAFF VISITS:"; 
                                     if(mysqli_num_rows($sel)>0){
                                         // Datatable content-Staff
@@ -291,9 +194,11 @@
                                             // Datatable content-Staff
                                     }
                                 }
-                                else if($category=="students"){
+
+                                if($category=="students" || $category=="all"){
+                                    echo "REPORT OF STUDENT VISITS:"; 
                                     if(mysqli_num_rows($selstud)>0){
-                                        // Datatable content-Staff
+                                        // Datatable content-Student
                                         ?>
                                         <table id="table_student">
                                             <thead>
@@ -337,6 +242,9 @@
                                             </tr>
                                             <?php 
                                         }
+                                        ?>
+                                        </table>
+                                        <?php
 
                                             // Datatable content-Student
                                     }
@@ -417,7 +325,7 @@
         $('#table_staff').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'copy', 'excel', 'pdf', 'print'
             ]
         });
     });
@@ -428,10 +336,14 @@
         $('#table_student').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'copy', 'excel', 'pdf', 'print'
             ]
         });
     });
 </script>
 
-<!-- Datatable Javascrpit -->
+<!-- Datatable Javascript -->
+
+<script type="text/javascript">
+  document.getElementById('category').value = "<?php echo $_POST['category'];?>";
+</script>

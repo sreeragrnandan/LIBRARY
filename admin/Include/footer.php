@@ -1,6 +1,6 @@
 
 
- <div class="footer" style="position : relative">
+ <div class="footer">
         <div class="container">
             <div class="row"> <!-- Footer Copyright -->
                 <div class="col" align="center">
@@ -16,6 +16,7 @@
 <style>
 	
 .footer {
+    position : relative;
     left: 0;
     bottom: 0;
     width: 100%;

@@ -342,7 +342,8 @@
             <!-- Reports-specified-time-frame -->
             Select Time frame:
             <form name="myform" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" >
-                <select name="timeline" id="Idtimeline" onchange="myform.submit();">
+                <select name="timeline" id="Idtimeline" onchange="myform.submit();" style="border-radius: 20px;
+    background:rgba(0,0,0,0.3);padding:3px 13px;" >
                     <option value="<?php echo "0000-00-00 00:00:00";  ?>">All Time
                     <option value="<?php echo date('Y-m-d H:i:s', strtotime("-1 day")); ?>">From Last day onwards
                     <option value="<?php echo date('Y-m-d H:i:s', strtotime("-1 week")); ?>">From Last week onwards
@@ -350,6 +351,19 @@
                     <option value="<?php echo date('Y-m-d H:i:s', strtotime("-1 year")); ?>">From Last year onwards
                 </select>
             </form>
+            <br>
+            <?php 
+            if(isset($_POST['timeline'])){
+            ?>
+                Displaying reports from <?php
+                $originalDate=$_POST['timeline'];
+                $timeline = date_create($originalDate);
+                echo date_format($timeline, 'd-m-Y H:m:s');
+                  ?>.
+
+            <?php 
+            }
+            ?>
 
             <!-- Reports-specified-time-frame -->
                 <div class="row">
