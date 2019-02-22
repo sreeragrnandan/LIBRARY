@@ -136,7 +136,7 @@
         $('#active').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'excel', 'pdf', 'print'
+                'copy',  'excel', 'pdf', 'print'
             ]
         });
     });

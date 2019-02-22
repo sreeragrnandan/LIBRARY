@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
         <!-- Datatable Stylesheet -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -76,7 +76,7 @@
                                             </div>
                                             <div class="col">
                                                 <select name="category" id="category" class="btn btn-prima" style="margin-top:18px;font-size:14px" required>
-                                                    <option value= "">Select Category
+                                                    <option value="">Select Category
                                                     <option value="all">All
                                                     <option value="students">Students
                                                     <option value="staff">Staff
@@ -85,7 +85,6 @@
                                             <div class="col" style="padding-top:18px">
                                                 <button type="submit" name="save" class="btn btn-prima" value="Search Results... ">
                                                     Submit
-                                                    <i class="fas fa-spinner fa-pulse"></i>
                                                 </button>
                                             </div>
                                         </div><br>
@@ -116,7 +115,7 @@
                         ?>
 
                                 <div class="col">
-                                    <div class="panel panel-yellow">
+                                    <div class="paneli panel-yellow">
                                         <?php 
                                     if(isset($_POST['save'])){
                                 ?>
@@ -147,7 +146,7 @@
                                 
 
                                 if($category=="all" || $category=="staff"){
-                                    echo "REPORT OF STAFF VISITS:"; 
+                                    ?> <b> REPORT OF STAFF VISITS: </b> <?php
                                     if(mysqli_num_rows($sel)>0){
                                         // Datatable content-Staff
                                         ?>
@@ -196,7 +195,11 @@
                                 }
 
                                 if($category=="students" || $category=="all"){
-                                    echo "REPORT OF STUDENT VISITS:"; 
+                                    ?>
+                                    <br><br>
+                                    <b>REPORT OF STUDENT VISITS: </b>
+                                    <?php
+                                
                                     if(mysqli_num_rows($selstud)>0){
                                         // Datatable content-Student
                                         ?>
@@ -250,6 +253,7 @@
                                     }
                                 }
                                 else{
+                                    
                                     echo "No visit found in the given time period".mysqli_error($conn);
                                 }
                             }
@@ -309,15 +313,15 @@
 ?>
 
 <!-- Datatable Javascrpit -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+<script type="text/javascript" charset="utf8" src="js/jquery.dataTables.js"></script>
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.buttons.min.js"></script>
+<script src="js/buttons.flash.min.js"></script>
+<script src="js/jszip.min.js"></script>
+<script src="js/pdfmake.min.js"></script>
+<script src="js/buttons.html5.min.js"></script>
+<script src="js/buttons.print.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 
 <script>
@@ -325,7 +329,7 @@
         $('#table_staff').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'excel', 'pdf', 'print'
+                'copy',  'excel', 'pdf', 'print'
             ]
         });
     });
